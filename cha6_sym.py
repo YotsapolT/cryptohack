@@ -53,8 +53,13 @@ inv_mix_columns(state)
 inv_shift_rows(state)
 print(state)
 
-result = ""
-for r in state:
-    for c in r:
-        result += chr(c)
-print(result)
+def matrix2bytes(matrix):
+    """ Converts a 4x4 matrix into a 16-byte array.  """
+    p = ""
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            p += chr(matrix[i][j])
+    return p
+
+print(matrix2bytes(state))
+

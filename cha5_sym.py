@@ -43,13 +43,18 @@ state = [
     [64, 80, 182, 255],
 ]
 
-
 def sub_bytes(s, sbox=s_box):
-    result = ""
-    for r in state:
-        for c in r:
-            result += chr(sbox[c])
-    return result
+    for i in range(len(s)):
+        for j in range(len(s[i])):
+            s[i][j] = sbox[s[i][j]]
 
+def matrix2bytes(matrix):
+    """ Converts a 4x4 matrix into a 16-byte array.  """
+    p = ""
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            p += chr(matrix[i][j])
+    return p
 
-print(sub_bytes(state, sbox=inv_s_box))
+sub_bytes(state, sbox=inv_s_box)
+print(matrix2bytes(state))
